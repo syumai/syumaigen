@@ -18,18 +18,25 @@ func assertData(data [][]int) error {
 	return nil
 }
 
-func GenerateImage(data [][]int, cmap ColorMap) (image.Image, error) {
+func GenerateImage(data [][]int, cmap ColorMap, scale int) (image.Image, error) {
 	if err := assertData(data); err != nil {
 		return nil, err
 	}
-	img := image.NewRGBA(image.Rect(0, 0, len(data[0]), len(data)))
+	if scale < 1 {
+		return nil, fmt.Errorf("scale must be >= 1")
+	}
+	img := image.NewRGBA(image.Rect(0, 0, len(data[0])*scale, len(data)*scale))
 	for i, line := range data {
 		for j, n := range line {
 			c, ok := cmap[n]
 			if !ok {
 				return nil, fmt.Errorf("color not found: %d", n)
 			}
-			img.Set(j, i, c)
+			for xs := 0; xs < scale; xs++ {
+				for ys := 0; ys < scale; ys++ {
+					img.Set(j*scale+ys, i*scale+xs, c)
+				}
+			}
 		}
 	}
 	return img, nil

@@ -12,6 +12,7 @@ func main() {
 	img, err := syumaigen.GenerateImage(
 		syumaigen.Pattern,
 		syumaigen.DefaultColorMap,
+		10,
 	)
 	if err != nil {
 		log.Fatal(err)
