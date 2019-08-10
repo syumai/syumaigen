@@ -38,6 +38,7 @@ func main() {
 			log.Fatal(err)
 		}
 	})
-	fmt.Println("listening on :8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	port := "8080"
+	fmt.Printf("listening on http://localhost:%s\n", port)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
