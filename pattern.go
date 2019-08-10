@@ -1,0 +1,42 @@
+package syumaigen
+
+import (
+	"strings"
+)
+
+const patternStr = `000000066660000000
+000000668867000000
+000226699866722000
+002336699866743200
+023336688866743320
+023333666667433320
+223333366674333322
+232233334443332242
+233322222222223342
+233333333333333342
+233331333331333342
+233331333331333342
+233333333333333342
+233335555555333342
+233333555553333342
+233333333333333442
+022333333333444220
+000222222222222000`
+
+var Pattern [][]int
+
+func init() {
+	Pattern = parsePattern(patternStr)
+}
+
+func parsePattern(s string) [][]int {
+	lines := strings.Split(s, "\n")
+	p := make([][]int, len(lines))
+	for i, line := range lines {
+		p[i] = make([]int, len(line))
+		for j, r := range line {
+			p[i][j] = int(r - '0')
+		}
+	}
+	return p
+}
