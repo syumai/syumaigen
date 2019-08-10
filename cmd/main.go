@@ -11,7 +11,7 @@ import (
 func main() {
 	img, err := syumaigen.GenerateImage(
 		syumaigen.Pattern,
-		syumaigen.DefaultColorMap,
+		syumaigen.GenerateRandomColorMap(),
 		10,
 	)
 	if err != nil {

@@ -5,7 +5,7 @@
 
 ## Features
 
-* [WIP] Randomize color generation
+* Randomize color generation
 
 ## Installation
 
