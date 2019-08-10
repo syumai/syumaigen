@@ -21,7 +21,7 @@ func main() {
 		)
 		if err != nil {
 			w.Header().Set("Content-Type", "text/plain")
-			w.WriteHeader(500)
+			w.WriteHeader(http.StatusInternalServerError)
 			fmt.Fprintf(w, "Internal Server Error")
 			return
 		}
@@ -29,11 +29,11 @@ func main() {
 		err = png.Encode(&buf, img)
 		if err != nil {
 			w.Header().Set("Content-Type", "text/plain")
-			w.WriteHeader(500)
+			w.WriteHeader(http.StatusInternalServerError)
 			fmt.Fprintf(w, "Internal Server Error")
 			return
 		}
-		w.WriteHeader(200)
+		w.WriteHeader(http.StatusOK)
 		if _, err := io.Copy(w, &buf); err != nil {
 			log.Fatal(err)
 		}
