@@ -1,10 +1,8 @@
 package syumaigen
 
 import (
-	"fmt"
 	"image/color"
 	"math/rand"
-	"os"
 	"time"
 
 	colorful "github.com/lucasb-eyer/go-colorful"
@@ -29,7 +27,6 @@ func GenerateRandomColorMap() ColorMap {
 	rand.Seed(time.Now().UnixNano())
 	h := rand.Float64() * 360.0
 	c := rand.Float64()
-	fmt.Fprintf(os.Stderr, "h: %f, c: %f", h, c)
 	return ColorMap{
 		0: DefaultColorMap[0],
 		1: DefaultColorMap[1],

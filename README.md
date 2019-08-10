@@ -19,6 +19,11 @@ go get -u github.com/syumai/syumaigen/cmd
 syumaigen > syumai.png
 ```
 
+### Example HTTP Server
+
+* `go run example/server/main.go`
+* This generates random avator image.
+
 ## License
 
 MIT
