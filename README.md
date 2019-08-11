@@ -22,7 +22,7 @@ go get -u github.com/syumai/syumaigen/cmd
 syumaigen > syumai.png
 
 # Show usage
-syumaigen -help > syumai.png
+syumaigen -help
 
 # Upscale (default: 10) and stop randomize color generation (default: true)
 syumaigen -scale=100 -random=false > syumai.png
