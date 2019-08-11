@@ -26,7 +26,7 @@ var DefaultColorMap = ColorMap{
 func GenerateRandomColorMap() ColorMap {
 	rand.Seed(time.Now().UnixNano())
 	h := rand.Float64() * 360.0
-	c := rand.Float64()
+	c := 0.4 + rand.Float64()*0.6
 	return ColorMap{
 		0: DefaultColorMap[0],
 		1: DefaultColorMap[1],

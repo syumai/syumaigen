@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"image/png"
 	"log"
 	"os"
@@ -8,11 +9,23 @@ import (
 	"github.com/syumai/syumaigen"
 )
 
+var (
+	scale  = flag.Int("scale", 10, "specify image scale")
+	random = flag.Bool("random", true, "randomize color generation")
+)
+
 func main() {
+	flag.Parse()
+
+	colorMap := syumaigen.DefaultColorMap
+	if *random {
+		colorMap = syumaigen.GenerateRandomColorMap()
+	}
+
 	img, err := syumaigen.GenerateImage(
 		syumaigen.Pattern,
-		syumaigen.GenerateRandomColorMap(),
-		10,
+		colorMap,
+		*scale,
 	)
 	if err != nil {
 		log.Fatal(err)
