@@ -7,7 +7,9 @@
 
 ## Features
 
+* Change scale of avatar image
 * Randomize color generation
+* Generate animated GIF
 
 ## Installation
 
