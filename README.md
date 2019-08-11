@@ -3,7 +3,7 @@
 ![syumai.gif](assets/syumai.gif)
 
 * A CLI tool to generate syumai's avatar image.
-* The avatar used in this command was designed by @tanakaworld.
+* The avatar used in this command was designed by [@tanakaworld](https://github.com/tanakaworld).
 
 ## Features
 
