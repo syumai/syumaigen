@@ -14,7 +14,7 @@
 ## Installation
 
 ```console
-go get -u github.com/syumai/syumaigen/cmd
+go get -u github.com/syumai/syumaigen/cmd/syumaigen
 ```
 
 ## Usage
