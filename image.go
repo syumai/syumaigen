@@ -3,7 +3,18 @@ package syumaigen
 import (
 	"fmt"
 	"image"
+	"image/color"
+	"image/color/palette"
+	"image/draw"
+	"image/gif"
 )
+
+var transparentPalette []color.Color
+
+func init() {
+	transparentPalette = append(transparentPalette, palette.WebSafe...)
+	transparentPalette = append(transparentPalette, color.RGBA{0, 0, 0, 0})
+}
 
 func assertData(data [][]int) error {
 	if data == nil || len(data) == 0 {
@@ -40,4 +51,25 @@ func GenerateImage(data [][]int, cmap ColorMap, scale int) (image.Image, error) 
 		}
 	}
 	return img, nil
+}
+
+func GenerateAnimatedSyumaiGIF(scale int) (*gif.GIF, error) {
+	g := &gif.GIF{}
+	frames := 30
+	for i := 0; i < frames; i++ {
+		h := float64(i) / float64(frames) * 360.0
+		img, err := GenerateImage(
+			Pattern,
+			GenerateColorMap(h, 0.95),
+			scale,
+		)
+		if err != nil {
+			return nil, err
+		}
+		palettedImg := image.NewPaletted(img.Bounds(), transparentPalette)
+		draw.FloydSteinberg.Draw(palettedImg, img.Bounds(), img, image.ZP)
+		g.Image = append(g.Image, palettedImg)
+		g.Delay = append(g.Delay, 10)
+	}
+	return g, nil
 }

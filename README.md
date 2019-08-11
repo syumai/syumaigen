@@ -1,5 +1,7 @@
 # syumaigen
 
+![syumai.gif](assets/syumai.gif)
+
 * A CLI tool to generate syumai's avatar image.
 * The avatar used in this command was designed by @tanakaworld.
 
@@ -24,6 +26,9 @@ syumaigen -help > syumai.png
 
 # Upscale (default: 10) and stop randomize color generation (default: true)
 syumaigen -scale=100 -random=false > syumai.png
+
+# generate animated GIF
+syumaigen -animated > syumai.gif
 ```
 
 ### Example HTTP Server
