@@ -3,6 +3,7 @@ package syumaigen
 import (
 	"image/color"
 	"math/rand"
+	"strings"
 	"time"
 
 	colorful "github.com/lucasb-eyer/go-colorful"
@@ -27,10 +28,10 @@ func GenerateRandomColorMap() ColorMap {
 	rand.Seed(time.Now().UnixNano())
 	h := rand.Float64() * 360.0
 	c := 0.4 + rand.Float64()*0.6
-	return GenerateColorMap(h, c)
+	return GenerateColorMapByHCL(h, c)
 }
 
-func GenerateColorMap(h float64, c float64) ColorMap {
+func GenerateColorMapByHCL(h float64, c float64) ColorMap {
 	return ColorMap{
 		0: DefaultColorMap[0],
 		1: DefaultColorMap[1],
@@ -42,5 +43,28 @@ func GenerateColorMap(h float64, c float64) ColorMap {
 		7: colorful.Hcl(h, c, 0.3).Clamped(),
 		8: colorful.Hcl(h, c, 0.7).Clamped(),
 		9: colorful.Hcl(h, c, 0.9).Clamped(),
+	}
+}
+
+func GenerateColorMapByColorCode(cc string) ColorMap {
+	if !strings.HasPrefix(cc, "#") {
+		cc = "#" + cc
+	}
+	col, err := colorful.Hex(cc)
+	if err != nil {
+		return DefaultColorMap
+	}
+	h, c, l := col.Hcl()
+	return ColorMap{
+		0: DefaultColorMap[0],
+		1: DefaultColorMap[1],
+		2: DefaultColorMap[2],
+		3: DefaultColorMap[3],
+		4: DefaultColorMap[4],
+		5: DefaultColorMap[5],
+		6: colorful.Hcl(h, c, l).Clamped(),
+		7: colorful.Hcl(h, c, l*0.8).Clamped(),
+		8: colorful.Hcl(h, c, 1.0-(1.0-l)*0.8).Clamped(),
+		9: colorful.Hcl(h, c, 1.0-(1.0-l)*0.2).Clamped(),
 	}
 }

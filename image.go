@@ -60,7 +60,7 @@ func GenerateAnimatedSyumaiGIF(scale int) (*gif.GIF, error) {
 		h := float64(i) / float64(frames) * 360.0
 		img, err := GenerateImage(
 			Pattern,
-			GenerateColorMap(h, 0.95),
+			GenerateColorMapByHCL(h, 0.95),
 			scale,
 		)
 		if err != nil {
