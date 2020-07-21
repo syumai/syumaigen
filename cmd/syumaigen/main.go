@@ -4,6 +4,7 @@ import (
 	"flag"
 	"image/gif"
 	"image/png"
+	"io"
 	"log"
 	"os"
 
@@ -11,10 +12,11 @@ import (
 )
 
 var (
-	scale    = flag.Int("scale", 10, "specify image scale")
-	code     = flag.String("code", "", "use color code")
-	random   = flag.Bool("random", true, "randomize color generation")
-	animated = flag.Bool("animated", false, "generate animated GIF")
+	scale     = flag.Int("scale", 10, "specify image scale")
+	code      = flag.String("code", "", "use color code")
+	random    = flag.Bool("random", true, "randomize color generation")
+	animated  = flag.Bool("animated", false, "generate animated GIF")
+	outputSVG = flag.Bool("svg", false, "generate SVG")
 )
 
 func main() {
@@ -36,6 +38,21 @@ func main() {
 		colorMap = syumaigen.GenerateColorMapByColorCode(*code)
 	} else if *random {
 		colorMap = syumaigen.GenerateRandomColorMap()
+	}
+
+	if *outputSVG {
+		img, err := syumaigen.GenerateSVG(
+			syumaigen.Pattern,
+			colorMap,
+			*scale,
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+		if _, err := io.Copy(os.Stdout, img); err != nil {
+			log.Fatal(err)
+		}
+		return
 	}
 
 	img, err := syumaigen.GenerateImage(
