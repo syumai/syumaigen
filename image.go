@@ -36,7 +36,9 @@ func GenerateImage(data [][]int, cmap ColorMap, scale int) (image.Image, error) 
 	if scale < 1 {
 		return nil, fmt.Errorf("scale must be >= 1")
 	}
-	img := image.NewRGBA(image.Rect(0, 0, len(data[0])*scale, len(data)*scale))
+	width := len(data[0]) * scale
+	height := len(data) * scale
+	img := image.NewRGBA(image.Rect(0, 0, width, height))
 	for i, line := range data {
 		for j, n := range line {
 			c, ok := cmap[n]

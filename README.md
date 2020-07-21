@@ -9,6 +9,7 @@
 
 * Change scale of avatar image
 * Randomize color generation
+* Generate PNG / SVG
 * Generate animated GIF
 
 ## Installation
@@ -20,7 +21,7 @@ go get -u github.com/syumai/syumaigen/cmd/syumaigen
 ## Usage
 
 ```sh
-# Generate image
+# Generate image (default: PNG)
 syumaigen > syumai.png
 
 # Show usage
@@ -31,6 +32,9 @@ syumaigen -scale=100 -random=false > syumai.png
 
 # generate animated GIF
 syumaigen -animated > syumai.gif
+
+# generate SVG
+syumaigen -svg > syumai.svg
 ```
 
 ### Example HTTP Server
