@@ -14,7 +14,7 @@ import (
 var (
 	scale     = flag.Int("scale", 10, "specify image scale")
 	code      = flag.String("code", "", "use color code")
-	random    = flag.Bool("random", true, "randomize color generation")
+	norandom    = flag.Bool("norandom", false, "stop randomize color generation")
 	animated  = flag.Bool("animated", false, "generate animated GIF")
 	outputSVG = flag.Bool("svg", false, "generate SVG")
 )
@@ -36,7 +36,7 @@ func main() {
 	colorMap := syumaigen.DefaultColorMap
 	if *code != "" {
 		colorMap = syumaigen.GenerateColorMapByColorCode(*code)
-	} else if *random {
+	} else if !*norandom {
 		colorMap = syumaigen.GenerateRandomColorMap()
 	}
 
